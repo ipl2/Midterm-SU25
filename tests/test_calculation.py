@@ -1,4 +1,6 @@
 '''Verifying the operations are correct for arithmetic'''
+# pylint: disable=unnecessary-dunder-call, invalid-name
+
 from decimal import Decimal
 import pytest
 from calculator.calculation import Calculation
@@ -17,9 +19,11 @@ from calculator.operations import add, subtract, multiply, divide
 ])
 
 def test_calculation_op(c, d, operation, expected):
+    '''Testing is expected returns correctly'''
     calculated = Calculation(c, d, operation)
     assert calculated.perform() == expected
 
 def test_division_zero():
+    '''Testing the error when dividing by zero'''
     with pytest.raises(ValueError, match="Do not divide using zero"):
-        calculation = Calculation(Decimal('4'), Decimal('0'), divide)
+        Calculation(Decimal('4'), Decimal('0'), divide)
