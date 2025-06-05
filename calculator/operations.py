@@ -1,16 +1,17 @@
+from decimal import Decimal
+
 '''How each function must behave'''
 
-def add(c,d):
+def add(c: Decimal, d: Decimal) -> Decimal:
     return c + d
 
-def subtract(c,d):
+def add(c: Decimal, d: Decimal) -> Decimal:
     return c - d
 
-def multiply(c,d):
+def add(c: Decimal, d: Decimal) -> Decimal:
     return c * d
 
-def divide(c,d):
-    try:
-        return c/d
-    except ZeroDivisionError:
-        None
+def add(c: Decimal, d: Decimal) -> Decimal:
+    if d == 0:
+        raise ZeroDivisionError("Do not divide using zero")
+    return a / b

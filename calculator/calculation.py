@@ -1,14 +1,18 @@
 '''Class Calculation is found here and referenced in init'''
+from decimal import Decimal
+from typing import Callable
 
-class Calculation:
-    def __init__(self,c,d,operation):
+from calculator.operations import add, subtract, multiply, divide
+
+class Calculation:  
+    def __init__(self, c: Decimal, d: Decimal, operation: Callable[[Decimal, Decimal], Decimal]):
         self.c = c
         self.d = d
         self.operation = operation 
 
-    def result(self):
-        return self.operation(self.c,self.d) #aka add(3,3)
-
-if __name__ == "__main__":
-    c = Calculation(3, 3, lambda x, y: x + y)
-    print(c.result())  # Should print 6
+    @staticmethod
+    def create(c: Decimal, d: Decimal, operation: Callable[[Decimal, Decimal], Decimal]) -> 'Calculation':
+        return Calculation(c, d, operation)
+    
+    def perform(self) -> Decimal:
+        return self.operation(self.c, self.d)
