@@ -4,9 +4,9 @@ from typing import Callable, List
 from calculator.calculation import Calculation
 
 class Calculations:
-    history: List[Calculations] = []
+    history: List[Calculation] = []
 
-    @classmethods
+    @classmethod
     def new_calc(cls, calculation: Calculation):
         cls.history.append(calculation)
 

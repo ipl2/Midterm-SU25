@@ -1,20 +1,30 @@
-from calculator.calculation import Calculation #using the class Calculation
-from calculator.operations import add, subtract, multiply, divide #using the operations
+'''Performs arthmetic operations using the methods in classes imported in here'''
+from decimal import Decimal
+from typing import Callable
+from calculator.calculation import Calculation
+from calculator.calculations import Calculations
+from calculator.operations import add, subtract, multiply, divide
 
 class Calculator:
 
     @staticmethod
-    def add(c,d):  #grabs the result() from the parameters of Calculation
-        return Calculation(c,d,add).result()
+    def _perform_operation(c: Decimal, d: Decimal, operation: Callable[[Decimal, Decimal], Decimal]) -> Decimal:
+        calculation = Calculation.create(c, d, operation)
+        Calculations.new_calc(calculation)
+        return calculation.perform()
 
     @staticmethod
-    def subtract(c,d):
-        return  Calculation(c,d,subtract).result()
-
-    @staticmethod
-    def multiply(c,d):
-        return Calculation(c,d,multiply).result()
+    def add(c: Decimal, d: Decimal) -> Decimal:
+        return Calculator._perform_operation(c, d, add)
     
     @staticmethod
-    def divide(c,d):
-        return Calculation(c,d,divide).result()
+    def subtract(c: Decimal, d: Decimal) -> Decimal:
+        return Calculator._perform_operation(c, d, subtract)
+    
+    @staticmethod
+    def multiply(c: Decimal, d: Decimal) -> Decimal:
+        return Calculator._perform_operation(c, d, multiply)
+    
+    @staticmethod
+    def divide(c: Decimal, d: Decimal) -> Decimal:
+        return Calculator._perform_operation(c, d, divide)
