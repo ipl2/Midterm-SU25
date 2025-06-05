@@ -4,20 +4,17 @@ from calculator.operations import add, subtract, multiply, divide #using the ope
 class Calculator:
 
     @staticmethod
-    def add(c,d):
-        calculation = Calculation(c,d,add)  #variable calculation is the result of c,d, operation
-        return calculation.result()     #obtained from operations.py
+    def add(c,d):  #grabs the result() from the parameters of Calculation
+        return Calculation(c,d,add).result()
 
     @staticmethod
     def subtract(c,d):
-        calculation = Calculation(c,d,subtract)
-        return calculation.result()
+        return  Calculation(c,d,subtract).result()
 
     @staticmethod
     def multiply(c,d):
-        calculation = Calculation(c,d,multiply)
-        return calculation.result()
+        return Calculation(c,d,multiply).result()
+    
     @staticmethod
     def divide(c,d):
-        calculation = Calculation(c,d,divide)
-        return calculation.result()
+        return Calculation(c,d,divide).result()
