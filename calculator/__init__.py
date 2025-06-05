@@ -1,17 +1,23 @@
-'''Returning the sum, subtraction, multiplication, division'''
+from calculator.calculation import Calculation #using the class Calculation
+from calculator.operations import add, subtract, multiply, divide #using the operations
 
-def add(c,d):
-    '''Returns the sum'''
-    return c + d
+class Calculator:
 
-def subtract(c,d):
-    '''Returns the subtraction'''
-    return c - d
+    @staticmethod
+    def add(c,d):
+        calculation = Calculation(c,d,add)  #variable calculation is the result of c,d, operation
+        return calculation.result()     #obtained from operations.py
 
-def multiply(c,d):
-    '''Returns the multiplication'''
-    return c * d
+    @staticmethod
+    def subtract(c,d):
+        calculation = Calculation(c,d,subtract)
+        return calculation.result()
 
-def divide(c,d):
-    '''Returns the division'''
-    return c / d
+    @staticmethod
+    def multiply(c,d):
+        calculation = Calculation(c,d,multiply)
+        return calculation.result()
+    @staticmethod
+    def divide(c,d):
+        calculation = Calculation(c,d,divide)
+        return calculation.result()
