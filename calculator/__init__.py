@@ -1,8 +1,17 @@
-'''Returning the sum and subtraction'''
-def add(a,b):
-    '''Returns the sum'''
-    return a + b
+'''Returning the sum, subtraction, multiplication, division'''
 
-def subtract(a,b):
+def add(c,d):
+    '''Returns the sum'''
+    return c + d
+
+def subtract(c,d):
     '''Returns the subtraction'''
-    return a - b
+    return c - d
+
+def multiply(c,d):
+    '''Returns the multiplication'''
+    return c * d
+
+def divide(c,d):
+    '''Returns the division'''
+    return c / d
