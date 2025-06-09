@@ -18,18 +18,18 @@ from calculator.operations import add, subtract, multiply, divide
     (Decimal('4.6'), Decimal('2'), divide, Decimal('2.3')),
 ])
 
-def test_calculation_op(c, d, operation, expected):
+def test_calculation_operations(c, d, operation, expected):
     '''Testing is expected returns correctly'''
-    calculated = Calculation(c, d, operation)
-    assert calculated.perform() == expected
+    calc = Calculation(c, d, operation)
+    assert calc.perform() == expected, f"Failed {operation.__name__} operation with {c} {d}"
 
 def test_calculation_repr():
     '''Testing the correct representation of string'''
-    calculated = Calculation(Decimal('4'), Decimal('2'), add)
+    calc = Calculation(Decimal('4'), Decimal('2'), add)
     expected_repr = "Calculation (4, 2, add)"
-    assert calculated.__repr__() == expected_repr, "The method __repr__ method output is not matching expected string"
+    assert calc.__repr__() == expected_repr, "The method __repr__ method output is not matching expected string"
 
 def test_division_zero():
     '''Testing the error when dividing by zero'''
-    with pytest.raises(ValueError, match="Do not divide using zero"):
+    with pytest.raises(ValueError, match="Cannot divide by zero"):
         Calculation(Decimal('4'), Decimal('0'), divide)

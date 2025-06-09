@@ -6,27 +6,27 @@ import pytest
 from calculator.operations import add, subtract, multiply, divide
 from calculator.calculation import Calculation
 
-def test_op_add():
+def test_operation_add():
     '''Testing addition function'''
-    calculated = Calculation(Decimal('4'), Decimal('2'), add)
-    assert calculated.perform() == Decimal('6'), "Add failed"
+    calculation = Calculation(Decimal('4'), Decimal('2'), add)
+    assert calculation.perform() == Decimal('6'), "Add failed"
 
-def test_op_subtract():
+def test_operation_subtract():
     '''Testing subtraction function'''
-    calculated = Calculation(Decimal('4'), Decimal('3'), subtract)
-    assert calculated.perform() == Decimal('1'), "Subtract failed"
+    calculation = Calculation(Decimal('4'), Decimal('3'), subtract)
+    assert calculation.perform() == Decimal('1'), "Subtract failed"
 
-def test_op_multiply():
+def test_operation_multiply():
     '''Testing multiplication function'''
-    calculated = Calculation(Decimal('4'), Decimal('2'), multiply)
-    assert calculated.perform() == Decimal('8'), "Multiplication failed"
+    calculation = Calculation(Decimal('4'), Decimal('2'), multiply)
+    assert calculation.perform() == Decimal('8'), "Multiplication failed"
 
-def test_op_divide():
+def test_operation_divide():
     '''Testing division function'''
-    calculated = Calculation(Decimal('4'), Decimal('2'), divide)
-    assert calculated.perform() == Decimal('2'), "Division failed"
+    calculation = Calculation(Decimal('4'), Decimal('2'), divide)
+    assert calculation.perform() == Decimal('2'), "Division failed"
 
-def test_zero_op_divide():
+def test_divide_by_zero():
     '''Testing division by zero function and error'''
-    with pytest.raises(ValueError, match="Do not divide using zero"):
+    with pytest.raises(ValueError, match="Cannot divide by zero"):
         Calculation(Decimal('4'), Decimal('0'), divide)
