@@ -29,5 +29,4 @@ def test_divide():
 def test_zero_divide():
     '''Testing division by zero function and error'''
     with pytest.raises(ValueError, match="Do not divide using zero"):
-        calculated = Calculation(Decimal('4'), Decimal('0'), divide)
-        calculated.perform()
+        Calculation(Decimal('4'), Decimal('0'), divide)

@@ -10,10 +10,10 @@ class Calculation:
         self.d = d
         self.operation = operation
         self.result = self.perform()
-
-    @staticmethod
-    def create(c: Decimal, d: Decimal, operation: Callable[[Decimal, Decimal], Decimal]) -> 'Calculation':
-        return Calculation(c, d, operation)
     
     def perform(self) -> Decimal:
         return self.operation(self.c, self.d)
+    
+    @staticmethod
+    def create(c: Decimal, d: Decimal, operation: Callable[[Decimal, Decimal], Decimal]) -> 'Calculation':
+        return Calculation(c, d, operation)
