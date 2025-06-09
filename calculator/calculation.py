@@ -17,3 +17,6 @@ class Calculation:
     @staticmethod
     def create(c: Decimal, d: Decimal, operation: Callable[[Decimal, Decimal], Decimal]) -> 'Calculation':
         return Calculation(c, d, operation)
+
+    def __repr__(self):
+        return f"Calculation ({self.c}, {self.d}, {self.operation.__name__})"

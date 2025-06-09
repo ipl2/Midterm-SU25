@@ -35,6 +35,13 @@ def test_latest_calc(set_calc):
     latest = Calculations.latest_calc()
     assert latest.c == Decimal('4') and latest.d == Decimal('2'), "Incorrect latest calculation"
 
+def test_find_operation(set_calc):
+    '''Testing calculations matches specific operation'''
+    add_operations = Calculations.find_operation("add")
+    assert len(add_operations) == 1, "Did not find the correct number of calculations performed with add"
+    subtract_operations = Calculations.find_operation("subtract")
+    assert len(subtract_operations) == 1, "Did not find the correct number of calculations performed with subtract"
+
 def test_empty_hist():
     '''Testing to see if it checks when history is empty'''
     Calculations.clear()
