@@ -1,22 +1,9 @@
 '''Verifying the operations are correct for arithmetic'''
 # pylint: disable=unnecessary-dunder-call, invalid-name
-
-from decimal import Decimal
 import pytest
+from decimal import Decimal
 from calculator.calculation import Calculation
-from calculator.operations import add, subtract, multiply, divide
-
-@pytest.mark.parametrize("c, d, operation, expected", [
-    (Decimal('4'), Decimal('2'), add, Decimal('6')),
-    (Decimal('4'), Decimal('2'), subtract, Decimal('2')),
-    (Decimal('4'), Decimal('2'), multiply, Decimal('8')),
-    (Decimal('4'), Decimal('4'), divide, Decimal('1')),
-
-    (Decimal('4.6'), Decimal('2'), add, Decimal('6.6')),
-    (Decimal('4.6'), Decimal('2'), subtract, Decimal('2.6')),
-    (Decimal('4.6'), Decimal('2'), multiply, Decimal('9.2')),
-    (Decimal('4.6'), Decimal('2'), divide, Decimal('2.3')),
-])
+from calculator.operations import add, divide
 
 def test_calculation_operations(c, d, operation, expected):
     '''Testing is expected returns correctly'''

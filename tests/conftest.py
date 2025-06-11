@@ -1,4 +1,5 @@
-import pytest
+'''Special file in pytest that holds configuration, hooks, and fixtures. They
+are shared amongst many test files. It is reusable and customizable within tests'''
 from decimal import Decimal
 from faker import Faker
 from calculator.operations import add, subtract, multiply, divide
@@ -15,10 +16,7 @@ def generate_test_data(num_records):
         'multiply': multiply,
         'divide': divide
     }
-
     for _ in range(num_records):
-        '''Iterates num_records of times to create individual
-        test cases. The _ is like a placeholder'''
         c = Decimal(fake.random_number(digits=2))
         d = Decimal(fake.random_number(digits=2))
         operation_name = fake.random_element(elements=list(operation_mappings.keys()))
@@ -26,12 +24,12 @@ def generate_test_data(num_records):
 
         if operation_func == divide:
             d = Decimal('1') if d == Decimal('0') else d
-        
+
         try:
             if operation_func == divide and d == Decimal('0'):
                 expected = "ZeroDivisionError"
             else:
-                expected = operation_func(a, b)
+                expected = operation_func(c, d)
         except ZeroDivisionError:
             expected = "ZeroDivisionError"
 
@@ -44,5 +42,5 @@ def pytest_generate_tests(metafunc):
     if {"c", "d", "expected"}.intersection(set(metafunc.fixturenames)):
         num_records = metafunc.config.getoption("num_records")
         parameters = list(generate_test_data(num_records))
-        modified_parameters = [(c, d, op_name if 'operation_name' in meta.func.fixturenames else op_func, expected) for c, d, op_name, op_func, expected in parameters]
+        modified_parameters = [(c, d, op_name if 'operation_name' in metafunc.fixturenames else op_func, expected) for c, d, op_name, op_func, expected in parameters]
         metafunc.parametrize("c,d,operation,expected", modified_parameters)

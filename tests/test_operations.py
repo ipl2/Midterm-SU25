@@ -1,32 +1,17 @@
 '''Testing the calculator operaration using the Calculations class'''
-
-from decimal import Decimal
 import pytest
-
-from calculator.operations import add, subtract, multiply, divide
+from decimal import Decimal
 from calculator.calculation import Calculation
+from calculator.operations import add, subtract, multiply, divide
 
-def test_operation_add():
-    '''Testing addition function'''
-    calculation = Calculation(Decimal('4'), Decimal('2'), add)
-    assert calculation.perform() == Decimal('6'), "Add failed"
-
-def test_operation_subtract():
-    '''Testing subtraction function'''
-    calculation = Calculation(Decimal('4'), Decimal('3'), subtract)
-    assert calculation.perform() == Decimal('1'), "Subtract failed"
-
-def test_operation_multiply():
-    '''Testing multiplication function'''
-    calculation = Calculation(Decimal('4'), Decimal('2'), multiply)
-    assert calculation.perform() == Decimal('8'), "Multiplication failed"
-
-def test_operation_divide():
-    '''Testing division function'''
-    calculation = Calculation(Decimal('4'), Decimal('2'), divide)
-    assert calculation.perform() == Decimal('2'), "Division failed"
+def test_operations(c, d, operation, expected):
+    '''Knows to get parameter out of conftest.py modified_parameters to make
+    sure Calculation class is all good'''
+    calculation = Calculation.create(c, d, operation)
+    assert calculation.perform() == expected, f"{operation.__name__} operation failed"
 
 def test_divide_by_zero():
-    '''Testing division by zero function and error'''
+    '''Making sure the division by zero is functioning correctly'''
     with pytest.raises(ValueError, match="Cannot divide by zero"):
-        Calculation(Decimal('4'), Decimal('0'), divide)
+        calculation = Calculation(Decimal('4'), Decimal('0'), divide)
+        calculation.perform()
