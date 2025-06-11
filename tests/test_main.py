@@ -1,3 +1,4 @@
+'''Has parametrize to check for specific tests'''
 import pytest
 from main import calculate_and_print
 
@@ -9,9 +10,11 @@ from main import calculate_and_print
     ("1", "0", 'divide', "An error occurred: Cannot divide by zero"),
     ("9", "3", 'unknown', "Unknown operation: unknown"),
     ("a", "3", 'add', "Invalid number input: a or 3 is not a valid number."),
-    ("5", "b", 'subtract', "Invalid number input: 5 or b is not a valid number.") 
+    ("5", "b", 'subtract', "Invalid number input: 5 or b is not a valid number.")
 ])
 def test_calculate_and_print(c_string, d_string, operation_string, expected_string, capsys):
+    '''Testing ouputs to print the correct result given the string inputs (add, subtract ...)
+    and operation (+, - ...)'''
     calculate_and_print(c_string, d_string, operation_string)
     captured = capsys.readouterr()
     assert captured.out.strip() == expected_string

@@ -1,7 +1,7 @@
 '''Special file in pytest that holds configuration, hooks, and fixtures. They
 are shared amongst many test files. It is reusable and customizable within tests'''
-import pytest
 from decimal import Decimal
+import pytest
 from faker import Faker
 from calculator.operations import add, subtract, multiply, divide
 
@@ -19,7 +19,7 @@ def generate_test_data(num_records):
     }
     for _ in range(num_records):
         c = Decimal(fake.random_number(digits=2))
-        d = Decimal(fake.random_number(digits=2))
+        d = Decimal(fake.random_number(digits=2)) if _ % 4 != 3 else Decimal(fake.random_number(digits=1))
         operation_name = fake.random_element(elements=list(operation_mappings.keys()))
         operation_func = operation_mappings[operation_name]
 
@@ -37,9 +37,12 @@ def generate_test_data(num_records):
         yield c, d, operation_name, operation_func, expected
 
 def pytest_addoption(parser):
+    '''Adds custom CLI to pytest'''
     parser.addoption("--num_records", action="store", default=5, type=int, help="Number of test records to generate")
 
 def pytest_generate_tests(metafunc):
+    '''If c, d, or expectd are used in test function, this hook will generate
+    using the number of records of tests'''
     if {"c", "d", "expected"}.intersection(set(metafunc.fixturenames)):
         num_records = metafunc.config.getoption("num_records")
         parameters = list(generate_test_data(num_records))
