@@ -15,8 +15,4 @@ def test_multiply():
 
 def test_divide():
     '''Test that division function works'''
-<<<<<<< HEAD
-    assert divide(3,3) == 1
-=======
     assert Calculator.divide(3,3) == 1
->>>>>>> part3
