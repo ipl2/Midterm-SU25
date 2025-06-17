@@ -6,15 +6,20 @@ register_command: registers a command with a name.
 execute_command: takes a single string from user input to parse, find correct command, 
 converts arguments to Decimal, and runs the command.
 '''
-
+from abc import ABC, abstractmethod
 from decimal import Decimal
+
+class Command(ABC):
+    @abstractmethod
+    def execute(self, *args):
+        pass
 
 class CommandHandler:
     def __init__(self):
         self.commands = {}
 
-    def register_command(self, name, command):
-        self.commands[name] = command
+    def register_command(self, command_name, command):
+        self.commands[command_name] = command
     
     def execute_command(self, command_line):
         parts = command_line.strip().split()
