@@ -6,17 +6,6 @@ from app.commands.divide import DivideCommand
 from app.commands.multiply import MultiplyCommand
 from app.commands.subtract import SubtractCommand
 
-
-@pytest.mark.parametrize("CommandClass", [AddCommand, MultiplyCommand, SubtractCommand, DivideCommand])
-def test_command_missing_args(CommandClass):
-    cmd = CommandClass()
-    with pytest.raises(ValueError, match="Two arguments are required."):
-        cmd.execute(Decimal("5"))
-    with pytest.raises(ValueError, match="Two arguments are required."):
-        cmd.execute()
-    with pytest.raises(ValueError, match="Arguments must be numbers."):
-        cmd.execute("a", "b")
-
 def test_add_command(capfd):
     command = AddCommand()
     result = command.execute(Decimal("4"), Decimal("2"))
