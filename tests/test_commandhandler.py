@@ -13,7 +13,7 @@ def test_command_handler_no_input(capsys):
 
 def test_execute_command_non_string_input(capsys):
     handler = CommandHandler()
-    handler.execute_command(123)  # passing int instead of str
+    handler.execute_command(123)  
     captured = capsys.readouterr()
     assert "Command must be a string." in captured.out
 
@@ -48,3 +48,4 @@ def test_command_handler_valid_execution(capsys):
     handler.execute_command("add 1 2 3")
     captured = capsys.readouterr()
     assert "Result: 6" in captured.out
+

@@ -19,11 +19,9 @@ def calculate_and_print(c, d, operation_name):
             print(f"Unknown operation: {operation_name}")
     except InvalidOperation:
         print(f"Invalid number input: {c} or {d} is not a valid number.")
-    except ValueError as e:
-        if "divide by zero" in str(e).lower():
-            print("An error occurred: Cannot divide by zero")
-        else:
-            print(f"An error occurred: {e}")
+    except ZeroDivisionError:
+        print("An error occurred: Cannot divide by zero")
+    except Exception as e:
         print(f"An error occurred: {e}")
 
 def main():
@@ -34,5 +32,5 @@ def main():
     _, c, d, operation = sys.argv
     calculate_and_print(c, d, operation)
 
-if __name__ == '__main__': # pragma: no cover
+if __name__ == '__main__':  # pragma: no cover
     main()
