@@ -40,3 +40,13 @@ def test_divide_by_zero():
     command = DivideCommand()
     with pytest.raises(ValueError, match="Cannot divide by zero"):
         command.execute(Decimal("1"), Decimal("0"))
+
+def test_divide_command_missing_args():
+    command = DivideCommand()
+    with pytest.raises(ValueError, match="Two arguments are required."):
+        command.execute(1)
+
+def test_divide_command_invalid_types():
+    command = DivideCommand()
+    with pytest.raises(ValueError, match="Arguments must be numbers."):
+        command.execute("a", "b")
