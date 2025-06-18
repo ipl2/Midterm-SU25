@@ -19,7 +19,7 @@ class CommandHandler:
         self.commands = {}
 
     def register_command(self, command_name, command):
-        self.commands[command_name] = command
+        self.commands[command_name.lower()] = command
     
     def execute_command(self, command_line):
         parts = command_line.strip().split()
@@ -27,7 +27,7 @@ class CommandHandler:
             print("No command was entered.")
             return
         
-        command_name = parts[0]
+        command_name = parts[0].lower()
         args = parts [1:]
         
         try:
