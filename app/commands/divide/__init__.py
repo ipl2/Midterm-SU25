@@ -4,7 +4,9 @@ class DivideCommand(Command):
     def execute(self, *args):
         try:
             return args[0] / args[1]
-        except (IndexError, TypeError):
-            raise ValueError("Two arguments are required.")
+        except IndexError:
+            print(f"Two arguments are required.")
+        except TypeError:
+            print(f"Arguments must be numbers.")
         except ZeroDivisionError:
-            raise ValueError("Division by zero is not allowed.")
+            raise ValueError("Cannot divide by zero")

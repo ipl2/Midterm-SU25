@@ -1,8 +1,8 @@
 import sys
-from app.commands.add_command import AddCommand
-from app.commands.subtract_command import SubtractCommand
-from app.commands.multiply_command import MultiplyCommand
-from app.commands.divide_command import DivideCommand
+from app.commands.add import AddCommand
+from app.commands.subtract import SubtractCommand
+from app.commands.multiply import MultiplyCommand
+from app.commands.divide import DivideCommand
 from app.commands import CommandHandler
 
 

@@ -8,7 +8,7 @@ def test_app_start_quit_command(capfd, monkeypatch):
     with pytest.raises(SystemExit) as e:
         app.start()
     
-    out, err = capfd.readouterr
+    out, err = capfd.readouterr()
     assert "Goodbye!" in out
     assert e.type == SystemExit
 

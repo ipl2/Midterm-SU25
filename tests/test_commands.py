@@ -1,4 +1,5 @@
 import pytest
+from decimal import Decimal
 from app import App
 from app.commands.add import AddCommand
 from app.commands.divide import DivideCommand
