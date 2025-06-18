@@ -1,8 +1,9 @@
+import sys
 from app.commands.add_command import AddCommand
 from app.commands.subtract_command import SubtractCommand
 from app.commands.multiply_command import MultiplyCommand
 from app.commands.divide_command import DivideCommand
-from app.command_handler import CommandHandler
+from app.commands import CommandHandler
 
 
 class App:
@@ -17,7 +18,7 @@ class App:
 
         while True:
             command_line = input("Enter command: ")
-            if command_line.lower() in ('quit'):
+            if command_line.lower() == 'quit':
                 print("Goodbye!")
-                break
+                sys.exit(0)
             self.command_handler.execute_command(command_line)
