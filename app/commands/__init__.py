@@ -12,7 +12,7 @@ from decimal import Decimal
 class Command(ABC):
     @abstractmethod
     def execute(self, *args):
-        pass
+        pass # pragma: no cover
 
 class CommandHandler:
     def __init__(self):
@@ -22,13 +22,18 @@ class CommandHandler:
         self.commands[command_name.lower()] = command
     
     def execute_command(self, command_line):
-        parts = command_line.strip().split()
+        try:
+            parts = command_line.strip().split()
+        except AttributeError:
+            print("Command must be a string.")
+            return
+    
         if not parts:
             print("No command was entered.")
             return
-        
+    
         command_name = parts[0].lower()
-        args = parts [1:]
+        args = parts[1:]
         
         try:
             command = self.commands[command_name]
