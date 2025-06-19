@@ -1,6 +1,6 @@
 '''Has parametrize to check for specific tests'''
-import pytest
 import sys
+import pytest
 from main import calculate_and_print, main
 from calculator.operations import divide
 

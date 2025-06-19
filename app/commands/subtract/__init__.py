@@ -8,4 +8,3 @@ class SubtractCommand(Command):
             return args[0] - args[1]
         except TypeError:
             raise ValueError("Arguments must be numbers.")
-
