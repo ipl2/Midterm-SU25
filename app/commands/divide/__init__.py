@@ -9,7 +9,4 @@ class DivideCommand(Command):
         if args[1] == 0:
             raise ValueError("Cannot divide by zero")
         
-        try:
-            return args[0] / args[1]
-        except TypeError:
-            raise ValueError("Arguments must be numbers.")
+        return args[0] / args[1]
