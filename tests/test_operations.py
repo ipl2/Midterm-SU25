@@ -1,8 +1,10 @@
+# pylint: disable=invalid-name
+
 '''Testing the calculator operaration using the Calculations class'''
-import pytest
 from decimal import Decimal
+import pytest
 from calculator.calculation import Calculation
-from calculator.operations import add, subtract, multiply, divide
+from calculator.operations import divide
 
 def test_operations(c, d, operation, expected):
     '''Knows to get parameter out of conftest.py modified_parameters to make
