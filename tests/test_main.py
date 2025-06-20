@@ -34,7 +34,7 @@ def test_main_usage_and_exit(monkeypatch, capsys):
         main()
     captured = capsys.readouterr()
     assert exc_info.value.code == 1
-    assert "Usage: python calculator_main.py <number1> <number2> <operation>" in captured.out
+    assert "Usage:\n  - REPL mode: python main.py\n  - CLI mode : python main.py <number1> <number2> <operation>" in captured.out
 
 def test_main_zero_division(monkeypatch, capsys):
     '''Testing division by zero is print appropriate error message'''
