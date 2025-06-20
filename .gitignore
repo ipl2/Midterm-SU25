@@ -1,5 +1,9 @@
 *.sw*
 .coverage
 .pytest_cache
+<<<<<<< HEAD
 *__pycache__/
+=======
+*__pycache__
+>>>>>>> development
 *.pyc

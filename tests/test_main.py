@@ -1,6 +1,7 @@
 '''Has parametrize to check for specific tests'''
+import sys
 import pytest
-from main import calculate_and_print
+from main import calculate_and_print, main
 
 @pytest.mark.parametrize("c_string, d_string, operation_string, expected_string", [
     ("5", "3", 'add', "The result of 5 add 3 is equal to 8"),
@@ -18,3 +19,26 @@ def test_calculate_and_print(c_string, d_string, operation_string, expected_stri
     calculate_and_print(c_string, d_string, operation_string)
     captured = capsys.readouterr()
     assert captured.out.strip() == expected_string
+
+def test_main_valid(monkeypatch, capsys):
+    '''Testing with valid command line arguments that outputs correctly'''
+    monkeypatch.setattr(sys, "argv", ["main.py", "2", "3", "add"])
+    main()
+    captured = capsys.readouterr()
+    assert "The result of 2 add 3 is equal to 5" in captured.out
+
+def test_main_usage_and_exit(monkeypatch, capsys):
+    '''Testing main exits when arguments are missing'''
+    monkeypatch.setattr(sys, "argv", ["main.py", "2", "add"])
+    with pytest.raises(SystemExit) as exc_info:
+        main()
+    captured = capsys.readouterr()
+    assert exc_info.value.code == 1
+    assert "Usage:\n  - REPL mode: python main.py\n  - CLI mode : python main.py <number1> <number2> <operation>" in captured.out
+
+def test_main_zero_division(monkeypatch, capsys):
+    '''Testing division by zero is print appropriate error message'''
+    monkeypatch.setattr(sys, "argv", ["main.py", "1", "0", "divide"])
+    main()
+    captured = capsys.readouterr()
+    assert "An error occurred: Cannot divide by zero" in captured.out

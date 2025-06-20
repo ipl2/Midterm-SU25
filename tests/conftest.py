@@ -1,3 +1,5 @@
+# pylint: disable=unused-import, disable=comparison-with-callable
+
 '''Special file in pytest that holds configuration, hooks, and fixtures. They
 are shared amongst many test files. It is reusable and customizable within tests'''
 from decimal import Decimal
@@ -41,10 +43,24 @@ def pytest_addoption(parser):
     parser.addoption("--num_records", action="store", default=5, type=int, help="Number of test records to generate")
 
 def pytest_generate_tests(metafunc):
-    '''If c, d, or expectd are used in test function, this hook will generate
-    using the number of records of tests'''
-    if {"c", "d", "expected"}.intersection(set(metafunc.fixturenames)):
+    '''Parametrize tests with c, d, expected only for selected test modules'''
+    allowed_modules = {
+        "test_calculation",
+        "test_calculations",
+        "test_calculator",
+        "test_main",
+        "test_operations",
+    }
+
+    # Extract module name without path and extension
+    module_name = metafunc.module.__name__.split('.')[-1]
+
+    # Only parametrize if the module is allowed and fixtures exist in the test
+    if module_name in allowed_modules and {"c", "d", "expected"}.issubset(metafunc.fixturenames):
         num_records = metafunc.config.getoption("num_records")
         parameters = list(generate_test_data(num_records))
-        modified_parameters = [(c, d, op_name if 'operation_name' in metafunc.fixturenames else op_func, expected) for c, d, op_name, op_func, expected in parameters]
+        modified_parameters = [
+            (c, d, op_name if 'operation_name' in metafunc.fixturenames else op_func, expected)
+            for c, d, op_name, op_func, expected in parameters
+        ]
         metafunc.parametrize("c,d,operation,expected", modified_parameters)

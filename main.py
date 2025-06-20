@@ -1,6 +1,7 @@
 import sys
-from calculator import Calculator
 from decimal import Decimal, InvalidOperation
+from calculator import Calculator
+from app import App
 
 def calculate_and_print(c, d, operation_name):
     operation_mappings = {
@@ -20,17 +21,21 @@ def calculate_and_print(c, d, operation_name):
     except InvalidOperation:
         print(f"Invalid number input: {c} or {d} is not a valid number.")
     except ZeroDivisionError:
-        print("Error: Division by zero.")
+        print("An error occurred: Cannot divide by zero")
     except Exception as e:
         print(f"An error occurred: {e}")
 
 def main():
-    if len(sys.argv) != 4:
-        print("Usage: python calculator_main.py <number1> <number2> <operation>")
+    if len(sys.argv) == 1:
+        App().start()
+    elif len(sys.argv) == 4:
+        _, c, d, operation = sys.argv
+        calculate_and_print(c, d, operation)
+    else:
+        print("Usage:")
+        print("  - REPL mode: python main.py")
+        print("  - CLI mode : python main.py <number1> <number2> <operation>")
         sys.exit(1)
-
-    _, c, d, operation = sys.argv
-    calculate_and_print(c, d, operation)
 
 if __name__ == '__main__':
     main()
