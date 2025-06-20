@@ -8,6 +8,7 @@ class App:
         self.command_handler = CommandHandler()
         load_plugins(self.command_handler)
 
+    def start(self):
         while True:
             command_line = input("Enter command: ")
             if command_line.lower() == 'quit':
