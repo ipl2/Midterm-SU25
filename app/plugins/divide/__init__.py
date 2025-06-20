@@ -3,6 +3,9 @@ from app.commands import Command
 
 class DivideCommand(Command):
     def execute(self, *args):
+        def name(self):
+            return "divide"
+
         if len(args) < 2:
             raise ValueError("Two arguments are required.")
         
