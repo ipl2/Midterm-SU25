@@ -1,4 +1,4 @@
-# Homework 2
+# Homework 5
 
 ## Install
 
@@ -11,3 +11,10 @@
 2. pytest --pylint
 3. pytest --pylint --cov
 
+## Project Enhancements
+
+1. Created commands
+2. Followed SOLID & DRY principles
+3. Implemented command pattern and REPL
+4. Plugin Architecture integration 
+5. Interactive calculator commands
