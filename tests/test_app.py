@@ -2,10 +2,6 @@
 
 import pytest
 from app import App
-from app.plugins.add import AddCommand
-from app.plugins.subtract import SubtractCommand
-from app.plugins.multiply import MultiplyCommand
-from app.plugins.divide import DivideCommand
 
 def test_app_start_quit_command(capfd, monkeypatch):
     '''tests function when user types quit'''
