@@ -12,7 +12,7 @@ class App:
         self.setup_directories()
         self.configure_logging()
         load_dotenv()
-        self.settings = self.load_environments_variables()
+        self.settings = self.load_environment_variables()
         self.settings.setdefault('ENVIRONMENT', 'PRODUCTION')
         self.command_handler = CommandHandler()
 
