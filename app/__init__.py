@@ -40,7 +40,7 @@ class App:
     def get_environment_variable(self, env_var: str = 'ENVIRONMENT'):
         return self.settings.get(env_var)
 
-    def load_plugins(handler):
+    def load_plugins(self):
         plugins_package = 'app.plugins'
         try:
             import app.plugins
