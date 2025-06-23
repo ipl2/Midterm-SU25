@@ -27,15 +27,34 @@ class CommandHandler:
         except AttributeError:
             print("Command must be a string.")
             return
-    
+
         if not parts:
             print("No command was entered.")
             return
-    
+
         command_name = parts[0].lower()
         args = parts[1:]
-        
+
         try:
+            command = self.commands[command_name] 
+            try:
+                parsed_args = [Decimal(arg) for arg in args]
+            except Exception:
+                parsed_args = args
+
+            result = command.execute(*parsed_args)
+            print(f"Result: {result}")
+
+        except KeyError:
+            print(f"Unknown command: {command_name}")
+        except Exception as e:
+            print(f"Error in executing '{command_name}': {e}")
+
+
+
+
+
+        '''try:
             command = self.commands[command_name]
             decimal_args = [Decimal(arg) for arg in args]
             result = command.execute(*decimal_args)
@@ -43,4 +62,4 @@ class CommandHandler:
         except KeyError:
             print(f"Unknown command: {command_name}")
         except Exception as e:
-            print(f"Error in executing {command_name}: {e}")
+            print(f"Error in executing {command_name}: {e}")'''
