@@ -36,14 +36,14 @@ class CommandHandler:
         args = parts[1:]
 
         try:
-            command = self.commands[command_name] 
+            command = self.commands[command_name]
             try:
                 parsed_args = [Decimal(arg) for arg in args]
             except Exception:
                 parsed_args = args
 
             result = command.execute(*parsed_args)
-            if result is not None:
+            if result is not None and result != "":
                 print(f"Result: {result}")
 
         except KeyError:

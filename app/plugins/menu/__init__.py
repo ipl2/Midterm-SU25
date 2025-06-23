@@ -8,8 +8,8 @@ class MenuCommand(Command):
         return "menu"
     
     def execute(self, *args):
-        commands = sorted(self.handler.commands.keys())
+        commands = [cmd.name() for cmd in self.handler.commands.values()]
         print("Commands available:")
-        for cmd in commands:
-            print(f"- {cmd}")
-            return None
+        for cmd_name in commands:
+            print(f"- {cmd_name}")
+        return ""
