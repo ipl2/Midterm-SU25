@@ -12,4 +12,3 @@ class MenuCommand(Command):
         print("Commands available:")
         for cmd in commands:
             print(f"- {cmd}")
-        return None
