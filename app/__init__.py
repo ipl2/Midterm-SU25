@@ -65,7 +65,8 @@ class App:
                     instance = item(self.command_handler)
                 except TypeError:
                     instance = item()
-                self.command_handler.register_command(plugin_name, instance)
+                command_name = instance.name() if hasattr(instance, 'name') else plugin_name
+                self.command_handler.register_command(command_name, instance)
                 self.logger.info(f"Command '{plugin_name}' from plugin '{plugin_name}' registered.")
 
     def start(self):
