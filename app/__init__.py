@@ -61,8 +61,12 @@ class App:
         for item_name in dir(plugin_module):
             item = getattr(plugin_module, item_name)
             if isinstance(item, type) and issubclass(item, Command) and item is not Command:
-                self.command_handler.register_command(plugin_name, item())
-                logging.info(f"Command '{plugin_name}' from plugin '{plugin_name}' registered.")
+                try:
+                    instance = item(self.command_handler)
+                except TypeError:
+                    instance = item()
+                self.command_handler.register_command(plugin_name, instance)
+                self.logger.info(f"Command '{plugin_name}' from plugin '{plugin_name}' registered.")
 
     def start(self):
         self.load_plugins()
