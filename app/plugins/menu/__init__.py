@@ -1,11 +1,13 @@
 from app.commands import Command
 
 class MenuCommand(Command):
+    def __inti__(self, handler):
+        self.handler = handler
+
     def name(self):
         return "menu"
     
     def execute(self, *args):
-        print("Available commands:")
-        from app.commands import registered_commands
-        for command_name in sorted(registered_commands()):
-            print(f"{command_name}")
+        print("Commands available:")
+        for command in sorted(self.handler.commands.keys()):
+            print(f"{command}")
