@@ -43,7 +43,8 @@ class CommandHandler:
                 parsed_args = args
 
             result = command.execute(*parsed_args)
-            print(f"Result: {result}")
+            if result is not None:
+                print(f"Result: {result}")
 
         except KeyError:
             print(f"Unknown command: {command_name}")
