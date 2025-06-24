@@ -19,7 +19,7 @@ class DivideCommand(Command):
             raise ValueError("Invalid decimal input.")
         
         if d == 0:
-            raise ValueError("Cannot divide by zero")
+            raise ValueError("Cannot divide by zero.")
         
         result = c / d
         log.info(f"Result: {result}")

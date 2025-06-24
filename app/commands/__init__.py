@@ -6,8 +6,11 @@ register_command: registers a command with a name.
 execute_command: takes a single string from user input to parse, find correct command, 
 converts arguments to Decimal, and runs the command.
 '''
+import logging
 from abc import ABC, abstractmethod
 from decimal import Decimal
+
+log = logging.getLogger(__name__)
 
 class Command(ABC):
     @abstractmethod
@@ -22,14 +25,10 @@ class CommandHandler:
         self.commands[command_name.lower()] = command
     
     def execute_command(self, command_line):
-        try:
-            parts = command_line.strip().split()
-        except AttributeError:
-            print("Command must be a string.")
-            return
+        parts = command_line.strip().split()
 
         if not parts:
-            print("No command was entered.")
+            log.warning("No command was entered.")
             return
 
         command_name = parts[0].lower()
@@ -47,20 +46,8 @@ class CommandHandler:
                 print(f"Result: {result}")
 
         except KeyError:
-            print(f"Unknown command: {command_name}")
+            log.warning(f"Unknow command entered {command_name}.")
+            print(f"Unknown command.")
         except Exception as e:
-            print(f"Error in executing '{command_name}': {e}")
-
-
-
-
-
-        '''try:
-            command = self.commands[command_name]
-            decimal_args = [Decimal(arg) for arg in args]
-            result = command.execute(*decimal_args)
-            print(f"Result: {result}")
-        except KeyError:
-            print(f"Unknown command: {command_name}")
-        except Exception as e:
-            print(f"Error in executing {command_name}: {e}")'''
+            log.error(f"Error in executing '{command_name}': {e}")
+            print(f"Error in executing.")

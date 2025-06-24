@@ -16,9 +16,6 @@ class AddCommand(Command):
             c = Decimal(str(args[0]))
             d = Decimal(str(args[1]))
         except InvalidOperation:
-            log.error("Invalid decimal input.")
             raise ValueError("Invalid decimal input.")
 
-        result = c + d
-        log.info(f"Result: {result}")
-        return result
+        return c + d
