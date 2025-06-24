@@ -1,5 +1,8 @@
+import logging
+from decimal import Decimal, InvalidOperation
 from app.commands import Command
 
+log = logging.getLogger(__name__)
 
 class DivideCommand(Command):
     def name(self):
@@ -9,7 +12,15 @@ class DivideCommand(Command):
         if len(args) < 2:
             raise ValueError("Two arguments are required.")
         
-        if args[1] == 0:
+        try:
+            c = Decimal(str(args[0]))
+            d = Decimal(str(args[1]))
+        except InvalidOperation:
+            raise ValueError("Invalid decimal input.")
+        
+        if d == 0:
             raise ValueError("Cannot divide by zero")
         
-        return args[0] / args[1]
+        result = c / d
+        log.info(f"Result: {result}")
+        return result
