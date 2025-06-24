@@ -80,7 +80,7 @@ class App:
                 try:
                     result = self.command_handler.execute_command(cmd_input)
                     if result:
-                        print(result)   # changed here
+                        print(result)
                 except KeyError:
                     logging.warning(f"Unknown command entered: '{cmd_input}'")
                 except Exception as e:

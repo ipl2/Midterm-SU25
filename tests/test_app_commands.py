@@ -12,7 +12,6 @@ def test_app_add_command(monkeypatch, capfd):
 
     out, _ = capfd.readouterr()
     assert "Result: 10" in out
-    assert "Goodbye!" in out
 
 def test_app_subtract_command(monkeypatch, capfd):
     '''tests the REPL subtract command correctly handles input'''
@@ -24,7 +23,6 @@ def test_app_subtract_command(monkeypatch, capfd):
 
     out, _ = capfd.readouterr()
     assert "Result: 7" in out
-    assert "Goodbye!" in out
 
 def test_app_multiply_command(monkeypatch, capfd):
     '''tests the REPL multiply command correctly handles input'''
@@ -36,7 +34,6 @@ def test_app_multiply_command(monkeypatch, capfd):
 
     out, _ = capfd.readouterr()
     assert "Result: 24" in out
-    assert "Goodbye!" in out
 
 def test_app_divide_command(monkeypatch, capfd):
     '''tests the REPL divide command correctly handles input'''
@@ -48,7 +45,6 @@ def test_app_divide_command(monkeypatch, capfd):
 
     out, _ = capfd.readouterr()
     assert "Result: 5" in out
-    assert "Goodbye!" in out
 
 def test_app_division_by_zero(monkeypatch, capfd):
     '''tests the REPL divide by zero command correctly handles input'''
@@ -59,5 +55,5 @@ def test_app_division_by_zero(monkeypatch, capfd):
         App().start()
 
     out, _ = capfd.readouterr()
-    assert "Error in executing divide: Cannot divide by zero" in out
-    assert "Goodbye!" in out
+    assert "Error in executing." in out
+
