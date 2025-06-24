@@ -78,7 +78,9 @@ class App:
                     logging.info("Exit command received.")
                     sys.exit(0)
                 try:
-                    self.command_handler.execute_command(cmd_input)
+                    result = self.command_handler.execute_command(cmd_input)
+                    if result:
+                        print(result)   # changed here
                 except KeyError:
                     logging.warning(f"Unknown command entered: '{cmd_input}'")
                 except Exception as e:
