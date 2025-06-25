@@ -8,16 +8,20 @@ DATA_DIR = os.getenv("DATA_DIR", "data")
 HISTORY_FILE = os.getenv("HISTORY_FILE", "calculator_history.csv")
 FILE_PATH = os.path.join(DATA_DIR, HISTORY_FILE)
 
+print(f"[DEBUG] DATA_DIR: {DATA_DIR}")
+print(f"[DEBUG] HISTORY_FILE: {HISTORY_FILE}")
+print(f"[DEBUG] FILE_PATH: {FILE_PATH}")
+
 logger = logging.getLogger(__name__)
 
 class SaveHistoryCommand(Command):
     def name(self):
-        return "save history"
+        return "save_history"
     
     def execute(self, *args):
         os.makedirs(DATA_DIR, exist_ok=True)
         try:
-            df = HistoryFacade().git_current_history()
+            df = HistoryFacade().get_current_history()
             df.to_csv(FILE_PATH, index=False)
             logger.info(f"History is saved to this path: {os.path.abspath(FILE_PATH)}")
             return "History saved."
@@ -27,7 +31,7 @@ class SaveHistoryCommand(Command):
         
 class LoadHistoryCommand(Command):
     def name(self):
-        return "load history"
+        return "load_history"
     
     def execute(self, *args):
         try:
@@ -45,7 +49,7 @@ class LoadHistoryCommand(Command):
         
 class ClearHistoryCommand(Command):
     def name(self):
-        return "clear history"
+        return "clear_history"
     
     def execute(self, *args):
         try:
@@ -60,7 +64,7 @@ class ClearHistoryCommand(Command):
 
 class DeleteHistoryCommand(Command):
     def name(self):
-        return "delete history"
+        return "delete_history"
     
     def execute(self, *args):
         try:

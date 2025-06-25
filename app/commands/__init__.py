@@ -46,7 +46,7 @@ class CommandHandler:
                 print(f"Result: {result}")
 
         except KeyError:
-            log.warning(f"Unknow command entered {command_name}.")
+            log.warning(f"Unknown command entered {command_name}.")
             print(f"Unknown command.")
         except Exception as e:
             log.error(f"Error in executing '{command_name}': {e}")
