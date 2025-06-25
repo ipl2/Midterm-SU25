@@ -22,4 +22,3 @@ class AddCommand(Command):
         result = c + d
         HistoryFacade().log_history("add", [c, d], result)
         return result
-    

@@ -20,5 +20,5 @@ class SubtractCommand(Command):
             raise ValueError("Invalid decimal input.")
 
         result = c - d
-        HistoryFacade().log_history("subtract", [c, d], result)
+        HistoryFacade().log_history("multiply", [c, d], result)
         return result

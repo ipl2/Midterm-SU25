@@ -7,6 +7,7 @@ from app.plugins.add import AddCommand
 from app.plugins.divide import DivideCommand
 from app.plugins.multiply import MultiplyCommand
 from app.plugins.subtract import SubtractCommand
+
 @pytest.mark.parametrize(
     "command_cls, a, b, expected",
     [

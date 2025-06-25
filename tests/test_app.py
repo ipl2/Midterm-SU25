@@ -2,7 +2,10 @@
 
 import pytest
 from app import App
-
+from app.plugins.add import AddCommand
+from app.plugins.multiply import MultiplyCommand
+from app.plugins.divide import DivideCommand
+from app.plugins.subtract import SubtractCommand
 
 def test_app_get_environment_variable():
     app = App()

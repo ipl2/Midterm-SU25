@@ -7,7 +7,6 @@ import pkgutil
 from dotenv import load_dotenv
 from app.commands import CommandHandler, Command
 from app.commands.factory import CommandFactory
-
 class App:
     def __init__(self):
         self.setup_directories()
@@ -62,15 +61,12 @@ class App:
         for item_name in dir(plugin_module):
             item = getattr(plugin_module, item_name)
             if isinstance(item, type) and issubclass(item, Command) and item is not Command:
-                command_name = None
-            try:
-                command_name = item().name() if hasattr(item, 'name') else plugin_name
-                CommandFactory.register_command(command_name, item)
-                instance = CommandFactory.create_command(command_name, self.command_handler)
-                self.command_handler.register_command(command_name, instance)
-                self.logger.info(f"Command '{command_name}' registered from plugin '{plugin_name}'.")
-            except Exception as e:
-                self.logger.error(f"Failed to register command from plugin '{plugin_name}': {e}")
+                try:
+                    instance = CommandFactory.create_command(item_name.lower(), self.command_handler)
+                except TypeError:
+                    instance = CommandFactory.create_command(item_name.lower())
+                self.command_handler.register_command(plugin_name, instance)
+                self.logger.info(f"Command '{plugin_name}' from plugin '{plugin_name}' registered.")
 
     def start(self):
         self.load_plugins()
@@ -85,6 +81,7 @@ class App:
                     if result:
                         print(result)
                 except KeyError:
+                    print("Unknown command.")
                     logging.warning(f"Unknown command entered: '{cmd_input}'")
                 except Exception as e:
                     logging.error(f"Error executing command '{cmd_input}': {e}", exc_info=True)
