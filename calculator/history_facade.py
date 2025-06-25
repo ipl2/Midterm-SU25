@@ -24,7 +24,7 @@ class HistoryFacade:
         self.history_df = pd.DataFrame(columns=["operation", "operands", "result"])
 
     def save_to_file(self, file_path):
-        os.makedirs(os.path.dirname(file_path), exist=True)
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
         self.history_df.to_csv(file_path, index=False)
 
     def load_from_file(self, file_path):
