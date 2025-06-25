@@ -17,9 +17,8 @@ class SaveHistoryCommand(Command):
     def execute(self, *args):
         os.makedirs(DATA_DIR, exist_ok=True)
         try:
-            df = HistoryFacade().get_current_history()
-            df.to_csv(FILE_PATH, index=False)
-            logger.info(f"History is saved to this path: {os.path.abspath(FILE_PATH)}")
+            HistoryFacade().save_to_file(FILE_PATH)
+            logger.info(f"History is saved to this path: {FILE_PATH}")
             return "History saved."
         except Exception as e:
             logger.error(f"Failed to save to history: {e}")
@@ -31,7 +30,7 @@ class LoadHistoryCommand(Command):
     
     def execute(self, *args):
         try:
-            df = pd.read_csv(FILE_PATH)
+            df = HistoryFacade().load_from_file(FILE_PATH)
             if df.empty:
                 return "History file is empty."
             print(df.to_string(index=False))
@@ -49,9 +48,9 @@ class ClearHistoryCommand(Command):
     
     def execute(self, *args):
         try:
-            HistoryFacade().clear_history()
-            if os.path.exists(FILE_PATH):
-                pd.DataFrame(columns=["operation", "operands", "result"]).to_csv(FILE_PATH, index=False)
+            facade = HistoryFacade()
+            facade.clear_history()
+            facade.clear_file(FILE_PATH)
             logger.info("History is all cleared from file.")
             return "History is cleared."
         except Exception as e:
@@ -64,12 +63,11 @@ class DeleteHistoryCommand(Command):
     
     def execute(self, *args):
         try:
-            if os.path.exists(FILE_PATH):
-                os.remove(FILE_PATH)
-                logger.info("History file no longer exists from deletion.")
-                return "History is deleted."
-            else:
-                return "No history file."
+            HistoryFacade().delete_file(FILE_PATH)
+            logger.info("History file no longer exists from deletion.")
+            return "History is deleted."
+        except FileNotFoundError:    
+            return "No history file."
         except Exception as e:
             logger.error(f"Failure in deleting history: {e}")
             return "Error deleting the history."
