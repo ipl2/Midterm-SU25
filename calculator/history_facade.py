@@ -33,7 +33,7 @@ class HistoryFacade:
         return pd.read_csv(file_path)
     
     def clear_file(self, file_path):
-        pd.DataFrame(columns=["operation", "operand", "result"]).to_csv(file_path, index=False)
+        pd.DataFrame(columns=["operation", "operands", "result"]).to_csv(file_path, index=False)
 
     def delete_file(self, file_path):
         if os.path.exists(file_path):

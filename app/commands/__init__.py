@@ -23,12 +23,14 @@ class CommandHandler:
 
     def register_command(self, command_name, command):
         self.commands[command_name.lower()] = command
+        log.info(f"Registered command: {command_name.lower()}.")
     
     def execute_command(self, command_line):
         parts = command_line.strip().split()
 
         if not parts:
             log.warning("No command was entered.")
+            print("Please enter a command.")
             return
 
         command_name = parts[0].lower()
@@ -44,6 +46,7 @@ class CommandHandler:
             result = command.execute(*parsed_args)
             if result is not None and result != "":
                 print(f"Result: {result}")
+            return result
 
         except KeyError:
             log.warning(f"Unknown command entered {command_name}.")
