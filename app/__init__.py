@@ -6,7 +6,7 @@ import importlib
 import pkgutil
 from dotenv import load_dotenv
 from app.commands import CommandHandler, Command
-from app.commands.factory import CommandFactory
+
 class App:
     def __init__(self):
         self.setup_directories()
