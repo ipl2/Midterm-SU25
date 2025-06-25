@@ -18,7 +18,8 @@ class AddCommand(Command):
             d = Decimal(str(args[1]))
         except InvalidOperation:
             raise ValueError("Invalid decimal input.")
-        
+
         result = c + d
         HistoryFacade().log_history("add", [c, d], result)
         return result
+    
