@@ -8,10 +8,6 @@ DATA_DIR = os.getenv("DATA_DIR", "data")
 HISTORY_FILE = os.getenv("HISTORY_FILE", "calculator_history.csv")
 FILE_PATH = os.path.join(DATA_DIR, HISTORY_FILE)
 
-print(f"[DEBUG] DATA_DIR: {DATA_DIR}")
-print(f"[DEBUG] HISTORY_FILE: {HISTORY_FILE}")
-print(f"[DEBUG] FILE_PATH: {FILE_PATH}")
-
 logger = logging.getLogger(__name__)
 
 class SaveHistoryCommand(Command):
