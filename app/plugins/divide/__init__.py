@@ -1,6 +1,7 @@
 import logging
 from decimal import Decimal, InvalidOperation
 from app.commands import Command
+from calculator.history_facade import HistoryFacade
 
 log = logging.getLogger(__name__)
 
@@ -22,5 +23,5 @@ class DivideCommand(Command):
             raise ValueError("Cannot divide by zero.")
         
         result = c / d
-        log.info(f"Result: {result}")
+        HistoryFacade().log_history("divide", [c, d], result)
         return result

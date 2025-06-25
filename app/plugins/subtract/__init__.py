@@ -1,6 +1,7 @@
 import logging
 from decimal import Decimal, InvalidOperation
 from app.commands import Command
+from calculator.history_facade import HistoryFacade
 
 log = logging.getLogger(__name__)
 
@@ -19,5 +20,5 @@ class SubtractCommand(Command):
             raise ValueError("Invalid decimal input.")
 
         result = c - d
-        log.info(f"Result: {result}")
+        HistoryFacade().log_history("subtract", [c, d], result)
         return result

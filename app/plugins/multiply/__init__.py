@@ -1,6 +1,7 @@
 import logging
 from app.commands import Command
 from decimal import Decimal, InvalidOperation
+from calculator.history_facade import HistoryFacade
 
 log = logging.getLogger(__name__)
 
@@ -19,5 +20,5 @@ class MultiplyCommand(Command):
             raise ValueError("Invalid decimal input.")
 
         result = c * d
-        log.info(f"Result: {result}")
+        HistoryFacade().log_history("multiply", [c, d], result)
         return result

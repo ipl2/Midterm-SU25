@@ -1,6 +1,7 @@
 import logging
 from app.commands import Command
 from decimal import Decimal, InvalidOperation
+from calculator.history_facade import HistoryFacade
 
 log = logging.getLogger(__name__)
 
@@ -17,5 +18,7 @@ class AddCommand(Command):
             d = Decimal(str(args[1]))
         except InvalidOperation:
             raise ValueError("Invalid decimal input.")
-
-        return c + d
+        
+        result = c + d
+        HistoryFacade().log_history("add", [c, d], result)
+        return result
