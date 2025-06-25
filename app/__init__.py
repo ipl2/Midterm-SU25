@@ -67,7 +67,7 @@ class App:
                     instance = item()
                 command_name = instance.name() if hasattr(instance, 'name') else plugin_name
                 self.command_handler.register_command(command_name, instance)
-                self.logger.info(f"Command '{plugin_name}' from plugin '{plugin_name}' registered.")
+                self.logger.info(f"Command '{command_name}' from plugin '{plugin_name}' registered.")
 
     def start(self):
         self.load_plugins()
