@@ -10,8 +10,6 @@ import logging
 from abc import ABC, abstractmethod
 from decimal import Decimal
 
-log = logging.getLogger(__name__)
-
 class Command(ABC):
     @abstractmethod
     def execute(self, *args):
@@ -23,13 +21,13 @@ class CommandHandler:
 
     def register_command(self, command_name, command):
         self.commands[command_name.lower()] = command
-        log.info(f"Registered command: {command_name.lower()}.")
+        logging.info(f"Registered command: {command_name.lower()}.")
     
     def execute_command(self, command_line):
         parts = command_line.strip().split()
 
         if not parts:
-            log.warning("No command was entered.")
+            logging.warning("No command was entered.")
             print("Please enter a command.")
             return
 
@@ -48,8 +46,8 @@ class CommandHandler:
                 print(f"Result: {result}")
 
         except KeyError:
-            log.warning(f"Unknown command entered {command_name}.")
+            logging.warning(f"Unknown command entered {command_name}.")
             print(f"Unknown command.")
         except Exception as e:
-            log.error(f"Error in executing '{command_name}': {e}")
+            logging.error(f"Error in executing '{command_name}': {e}")
             print(f"Error in executing.")

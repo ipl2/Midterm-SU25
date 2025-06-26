@@ -3,8 +3,6 @@ from decimal import Decimal, InvalidOperation
 from app.commands import Command
 from calculator.history_facade import HistoryFacade
 
-log = logging.getLogger(__name__)
-
 class SubtractCommand(Command):
     def name(self):
         return "subtract"

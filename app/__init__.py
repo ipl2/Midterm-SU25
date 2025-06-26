@@ -10,7 +10,7 @@ from app.factory import CommandFactory
 
 class App:
     def __init__(self):
-        self.setup_directories()
+        os.makedirs('logs', exist_ok=True)
         self.configure_logging()
         load_dotenv()
         self.settings = self.load_environment_variables()
@@ -18,20 +18,12 @@ class App:
         self.command_handler = CommandHandler()
         self.command_factory = CommandFactory(self.command_handler)
 
-        self.logger = logging.getLogger(__name__)
-        self.logger.info("Application initialized.")
-
-    def setup_directories(self):
-        os.makedirs('logs', exist_ok=True)
-        os.makedirs('data', exist_ok=True)
-
     def configure_logging(self):
         logging_conf_path = 'logging.conf'
         try:
             logging.config.fileConfig(logging_conf_path, disable_existing_loggers=False)
         except Exception:
             logging.basicConfig(level =logging.INFO, format='%(asctime)s - %(levelname)s- %(message)s')
-        
         logging.info("Logging is configured.")
 
     def load_environment_variables(self):
@@ -69,7 +61,7 @@ class App:
                     instance = item()
                 command_name = instance.name() if hasattr(instance, 'name') else plugin_name
                 self.command_handler.register_command(command_name, instance)
-                self.logger.info(f"Command '{command_name}' from plugin '{plugin_name}' registered.")
+                logging.info(f"Command '{command_name}' from plugin '{plugin_name}' registered.")
 
     def start(self):
         self.load_plugins()

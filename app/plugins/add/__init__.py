@@ -3,8 +3,6 @@ from app.commands import Command
 from decimal import Decimal, InvalidOperation
 from calculator.history_facade import HistoryFacade
 
-log = logging.getLogger(__name__)
-
 class AddCommand(Command):
     def name(self):
         return "add"
