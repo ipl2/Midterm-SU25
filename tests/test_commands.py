@@ -37,3 +37,10 @@ def test_divide_by_zero():
     command = DivideCommand()
     with pytest.raises(ValueError, match="Cannot divide by zero"):
         command.execute(Decimal("1"), Decimal("0"))
+
+@pytest.mark.parametrize("command_cls", [AddCommand, SubtractCommand, MultiplyCommand, DivideCommand])
+def test_invalid_decimal_input(command_cls):
+    '''tests invalid input and raises correct error'''
+    command = command_cls()
+    with pytest.raises(ValueError, match="Invalid decimal input."):
+        command.execute("Invalid", "2")
