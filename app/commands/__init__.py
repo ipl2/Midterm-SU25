@@ -46,7 +46,6 @@ class CommandHandler:
             result = command.execute(*parsed_args)
             if result is not None and result != "":
                 print(f"Result: {result}")
-            return result
 
         except KeyError:
             log.warning(f"Unknown command entered {command_name}.")
