@@ -2,12 +2,10 @@
 
 import pytest
 from app import App
-from app.plugins.add import AddCommand
-from app.plugins.multiply import MultiplyCommand
-from app.plugins.divide import DivideCommand
-from app.plugins.subtract import SubtractCommand
+
 
 def test_app_get_environment_variable():
+    '''tests the retrieval of environment variable'''
     app = App()
     current_environment = app.get_environment_variable('ENVIRONMENT')
     assert current_environment in ['DEVELOPMENT', 'TESTING', 'PRODUCTION'], f"Invalid ENVIRONMENT: {current_environment}"
@@ -20,7 +18,6 @@ def test_app_start_quit_command(capfd, monkeypatch):
     with pytest.raises(SystemExit) as e:
         app.start()
 
-    out = capfd.readouterr().out
     assert e.type == SystemExit
 
 def test_app_start_unknown_command(capfd, monkeypatch):

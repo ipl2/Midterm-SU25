@@ -56,4 +56,3 @@ def test_app_division_by_zero(monkeypatch, capfd):
 
     out, _ = capfd.readouterr()
     assert "Error in executing." in out
-
