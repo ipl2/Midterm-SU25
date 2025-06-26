@@ -6,6 +6,7 @@ import importlib
 import pkgutil
 from dotenv import load_dotenv
 from app.commands import CommandHandler, Command
+from app.factory import CommandFactory
 
 class App:
     def __init__(self):
@@ -15,6 +16,7 @@ class App:
         self.settings = self.load_environment_variables()
         self.settings.setdefault('ENVIRONMENT', 'PRODUCTION')
         self.command_handler = CommandHandler()
+        self.command_factory = CommandFactory(self.command_handler)
 
         self.logger = logging.getLogger(__name__)
         self.logger.info("Application initialized.")
@@ -62,7 +64,7 @@ class App:
             item = getattr(plugin_module, item_name)
             if isinstance(item, type) and issubclass(item, Command) and item is not Command:
                 try:
-                    instance = item(self.command_handler)
+                    instance = self.command_factory.create(item)
                 except TypeError:
                     instance = item()
                 command_name = instance.name() if hasattr(instance, 'name') else plugin_name
