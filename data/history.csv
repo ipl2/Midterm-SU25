@@ -1,0 +1,5 @@
+operation,operands,result
+add,"4,5",9
+multiply,"6,7",-1
+divide,"4,2",2
+multiply,"8,9",72
