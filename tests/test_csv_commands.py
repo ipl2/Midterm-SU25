@@ -1,4 +1,5 @@
-import pytest
+'''testing the commands of history functionality'''
+
 from calculator.history_facade import HistoryFacade
 from app.plugins.csv import SaveHistoryCommand, LoadHistoryCommand, ClearHistoryCommand, DeleteHistoryCommand
 
