@@ -93,7 +93,7 @@ Link:
 ## Environment Variables
 Environment variables are used to configure where thr app stores or retrieves the calculator history. The DATA_DIR holds the hisotry files. The HISTORY_FILE stores the calculator history.  
 
-Link:
+Link:  
 [Example of usage](https://github.com/ipl2/Midterm-SU25/blob/main/app/plugins/csv/__init__.py#L11-L23)  
 
 ## Logging
@@ -114,5 +114,12 @@ Link:
 LBYL is used to check if the .env file or the logging config file exists before it even tries to use it.  
 
 Link:  
-[Checking .env file and logging condif LBYL usage](https://github.com/ipl2/Midterm-SU25/blob/main/app/__init__.py#L21-L27)  
+[Checking .env file and logging config LBYL usage](https://github.com/ipl2/Midterm-SU25/blob/main/app/__init__.py#L21-L27)  
 
+## Midterm Paper
+
+[Read the Midterm Paper](https://docs.google.com/document/d/18gssYBFLmrn6g98iAhlxDEe7EDPnb-jFc2iQT6SK0yg/edit?usp=sharing)
+
+## Midterm Video
+
+[Watch the Midterm Presentation](https://drive.google.com/file/d/1cmqSwB1w5FOf-qS-x_Pp59WAdT3mnIQX/view?usp=sharing)
