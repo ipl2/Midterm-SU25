@@ -1,7 +1,23 @@
 '''testing the commands of history functionality'''
 
+import pytest
+from unittest.mock import patch, MagicMock
 from calculator.history_facade import HistoryFacade
 from app.plugins.csv import SaveHistoryCommand, LoadHistoryCommand, ClearHistoryCommand, DeleteHistoryCommand
+
+@pytest.fixture
+def mock_facade():
+    with patch("app.plugins.csv.HistoryFacade") as mock:
+        yield mock
+
+@pytest.fixture
+def command_instances():
+    return {
+        "save": SaveHistoryCommand(),
+        "load": LoadHistoryCommand(),
+        "clear": ClearHistoryCommand(),
+        "delete": DeleteHistoryCommand()
+    }
 
 def test_save_history():
     '''tests the save command saves history'''
@@ -29,3 +45,40 @@ def test_delete_history():
     command = DeleteHistoryCommand()
     result = command.execute()
     assert result in ["History is deleted.", "No history file."]
+
+def test_save_history_failure(mock_facade, command_instances):
+    mock_facade.return_value.save_to_file.side_effect = Exception("Save failed")
+    result = command_instances["save"].execute()
+    assert result == "Error in saving to history"
+
+def test_load_history_file_not_found(mock_facade, command_instances):
+    mock_facade.return_value.load_from_file.side_effect = FileNotFoundError()
+    result = command_instances["load"].execute()
+    assert result == "History file is not found."
+
+def test_load_history_failure(mock_facade, command_instances):
+    mock_facade.return_value.load_from_file.side_effect = Exception("Load failed")
+    result = command_instances["load"].execute()
+    assert result == "Error in loading history."
+
+def test_load_history_empty(mock_facade, command_instances):
+    mock_df = MagicMock()
+    mock_df.empty = True
+    mock_facade.return_value.load_from_file.return_value = mock_df
+    result = command_instances["load"].execute()
+    assert result == "History file is empty."
+
+def test_clear_history_failure(mock_facade, command_instances):
+    mock_facade.return_value.clear_file.side_effect = Exception("Clear failed")
+    result = command_instances["clear"].execute()
+    assert result == "Error in clearing the history."
+
+def test_delete_history_file_not_found(mock_facade, command_instances):
+    mock_facade.return_value.delete_file.side_effect = FileNotFoundError()
+    result = command_instances["delete"].execute()
+    assert result == "No history file."
+
+def test_delete_history_failure(mock_facade, command_instances):
+    mock_facade.return_value.delete_file.side_effect = Exception("Delete failed")
+    result = command_instances["delete"].execute()
+    assert result == "Error deleting the history."
