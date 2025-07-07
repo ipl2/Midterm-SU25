@@ -3,7 +3,4 @@ omit =
     tests/conftest.py
     *main.py
     app/commands/__init__.py
-
-[report]
-exclude_lines =
-    if __name__ == .__main__.:
+    app/__init__.py
