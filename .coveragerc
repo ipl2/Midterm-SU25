@@ -4,3 +4,4 @@ omit =
     *main.py
     app/commands/__init__.py
     app/__init__.py
+    calculator/history_facade.py
